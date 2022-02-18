@@ -13,16 +13,48 @@ npm install --save user-context
 ## Usage
 
 ```tsx
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
+import * as userContext from 'user-context'
+import jwtDecode from 'jwt-decode'
 
-import MyComponent from 'user-context'
-import 'user-context/dist/index.css'
+const App = () => {
+  const [ auth, setAuth ] = useState(undefined)
+  const [reloadUser, setReloadUser] = useState(false)
+ 
+  const login = () => {}
+  const logout = () => {}
+  
+    const autData = useMemo(
+    () => ({
+      auth: () => null,
+      login,
+      logout,
+      setReloadUser:() => null,
+    }),
+    [auth]
+  );
+ 
+   useEffect(() => {
+    const token = context.getToken()
+    if(token){
+      setAuth({
+        token,
+        idUser: jwtDecode(token).id
+      })
+    } else{
+      setAuth(null)
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+    }
+    setReloadUser(false)
+  }, [setReloadUser])
+  
+   return (
+    <context.AuthContext.Provider value={autData}>
+    </context.AuthContext.Provider>
+    )
+
 }
+
 ```
 
 ## License
