@@ -10,7 +10,7 @@
 ## Install
 
 ```bash
-npm install --save user-context
+npm install --save user-context-fran-dev
 ```
 
 ## Usage
@@ -24,18 +24,24 @@ const App = () => {
   const [ auth, setAuth ] = useState(undefined)
   const [reloadUser, setReloadUser] = useState(false)
  
-  const login = () => {}
-  const logout = () => {}
+ const login = () => {
+  context.login(token, setAuth)
+  }
+
+  const logout = () => {
+    context.logout(auth, setAuth)
+  }
   
-    const autData = useMemo(
+  const autData = useMemo(
     () => ({
-      auth: () => null,
+      auth,
       login,
       logout,
-      setReloadUser:() => null,
+      setReloadUser,
     }),
     [auth]
   );
+
  
    useEffect(() => {
     const token = context.getToken()
