@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import * as context from 'user-context'
-
 import jwtDecode from 'jwt-decode'
+import {loginApi} from './api/userLogin'
+import { Link } from 'react-router-dom';
 
 
 const App = () => {
@@ -11,33 +12,39 @@ const App = () => {
 
   const token = null
 
-  const login = (token) => {
-    context.setToken(token)
-    setAuth({
-      token,
-      idUser: jwtDecode(token)
-    })
+  const login = () => {
+  context.login(token, setAuth)
+  }
+
+  const logout = () => {
+    context.logout(auth, setAuth)
   }
   
-  const logout = () => {
-    if(auth){
-      context.removeToken();
-      setAuth(null)
-
-    }
-  }
 
   const autData = useMemo(
     () => ({
-      auth: () => null,
+      auth,
       login,
       logout,
-      setReloadUser:() => null,
+      setReloadUser,
     }),
     [auth]
   );
 
+  const  loginButton = async () => {
+    console.log('Login')
+    const response = await loginApi({identifier:'whitehat94@hotmail.com', password: '123'})
+    if(response?.jwt){
+      const token = response.jwt
+      context.login(response?.jwt, setAuth)
+    }
+  }
+
+  
+
+
   useEffect(() => {
+
     const token = context.getToken()
     if(token){
       setAuth({
@@ -46,13 +53,15 @@ const App = () => {
       })
     } else{
       setAuth(null)
-
     }
     setReloadUser(false)
   }, [setReloadUser])
 
   return (
     <context.AuthContext.Provider value={autData}>
+      <button onClick={() => loginButton()}>Login</button>
+      <button onClick={() => logout()}>Logout</button>
+      <button onClick={() => context.hasExpiredToken(context.getToken())}>Token Decode</button>
     </context.AuthContext.Provider>
     )
 

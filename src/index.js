@@ -5,13 +5,13 @@ export { default as AuthContext } from './context/AuthContext'
 export  *  from './authFunctions/authFunctions' 
 
 
-export const ExampleComponent = (props) => {
-
-  const { autData } = props
+export const ExampleComponent = () => {
 
   return (
-    <div></div>
-  )  
+    <div>
+   
+    </div>
+  )
 }
 
 export default ExampleComponent;

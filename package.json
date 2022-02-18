@@ -11,6 +11,9 @@
   "engines": {
     "node": ">=10"
   },
+  "publicConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
