@@ -17,7 +17,7 @@ npm install --save user-context-fran-dev
 
 ```tsx
 import React, { useEffect, useState } from 'react'
-import * as userContext from 'user-context'
+import * as userContext from 'user-context-fran-dev'
 import jwtDecode from 'jwt-decode'
 
 const App = () => {
