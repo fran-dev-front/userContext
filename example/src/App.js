@@ -12,8 +12,9 @@ const App = () => {
 
   const token = null
 
-  const login = () => {
-  context.login(token, setAuth)
+  const login = (data) => {
+  context.login(data, setAuth)
+  console.log(data)
   }
 
   const logout = () => {
@@ -36,7 +37,7 @@ const App = () => {
     const response = await loginApi({identifier:'whitehat94@hotmail.com', password: '123'})
     if(response?.jwt){
       const token = response.jwt
-      context.login(response?.jwt, setAuth)
+      login(response, setAuth)
     }
   }
 

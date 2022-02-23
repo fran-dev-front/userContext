@@ -15,11 +15,12 @@ export function removeToken(){
 
 export const login = (data, setAuth) => {
   setToken(data.jwt)
+  console.log(data.jwt)
+  console.log(data)
   setAuth({
-    token,
+    token: data.jwt,
     idUser: jwtDecode(data.jwt),
     user: data.user
-
   })
 }
 export const logout = (auth, setAuth) => {
