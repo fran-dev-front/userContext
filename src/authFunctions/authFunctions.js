@@ -17,6 +17,7 @@ export function getUser(){
 
 export function removeToken(){
   localStorage.removeItem(TOKEN)
+  localStorage.removeItem(USER)
 }
 
 export const login = (token, user, setAuth) => {
