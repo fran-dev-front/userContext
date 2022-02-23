@@ -12,9 +12,8 @@ const App = () => {
 
   const token = null
 
-  const login = (data) => {
-  context.login(data, setAuth)
-  console.log(data)
+  const login = (data, user) => {
+  context.login(data, user,  setAuth)
   }
 
   const logout = () => {
@@ -37,20 +36,21 @@ const App = () => {
     const response = await loginApi({identifier:'whitehat94@hotmail.com', password: '123'})
     if(response?.jwt){
       const token = response.jwt
-      login(response, setAuth)
+      login(token, response.user)
     }
   }
 
-  
 
 
   useEffect(() => {
-
     const token = context.getToken()
+    const user = context.getUser()
+    console.log(user)
     if(token){
       setAuth({
         token,
-        idUser: jwtDecode(token).id
+        idUser: jwtDecode(token).id,
+        user: user
       })
     } else{
       setAuth(null)
@@ -62,7 +62,7 @@ const App = () => {
     <context.AuthContext.Provider value={autData}>
       <button onClick={() => loginButton()}>Login</button>
       <button onClick={() => logout()}>Logout</button>
-      <button onClick={() => context.hasExpiredToken(context.getToken())}>Token Decode</button>
+      <button onClick={() => context.hasExpiredToken(context.getToken())}>Token Decode </button>
     </context.AuthContext.Provider>
     )
 

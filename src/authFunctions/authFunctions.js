@@ -1,26 +1,30 @@
 export const TOKEN = "token"; 
+export const USER = "user";
 import jwtDecode from 'jwt-decode'
 
-export function setToken(token){
+export function setToken(token, user){
   localStorage.setItem(TOKEN, token)
+  localStorage.setItem(USER, JSON.stringify(user))
 }
 
 export function getToken(){
   return localStorage.getItem(TOKEN)
 }
 
+export function getUser(){
+  return JSON.parse(localStorage.getItem(USER))
+}
+
 export function removeToken(){
   localStorage.removeItem(TOKEN)
 }
 
-export const login = (data, setAuth) => {
-  setToken(data.jwt)
-  console.log(data.jwt)
-  console.log(data)
+export const login = (token, user, setAuth) => {
+  setToken(token, user)
   setAuth({
-    token: data.jwt,
-    idUser: jwtDecode(data.jwt),
-    user: data.user
+    token,
+    idUser: jwtDecode(token),
+    user: user
   })
 }
 export const logout = (auth, setAuth) => {
