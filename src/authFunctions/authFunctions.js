@@ -13,11 +13,13 @@ export function removeToken(){
   localStorage.removeItem(TOKEN)
 }
 
-export const login = (token, setAuth) => {
-  setToken(token)
+export const login = (data, setAuth) => {
+  setToken(data.jwt)
   setAuth({
     token,
-    idUser: jwtDecode(token)
+    idUser: jwtDecode(data.jwt),
+    user: data.user
+
   })
 }
 export const logout = (auth, setAuth) => {
