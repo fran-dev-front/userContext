@@ -1,6 +1,6 @@
 {
   "name": "user-context-fran-dev",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "description": "Made with create-react-library",
   "author": "fran-dev",
   "license": "MIT",
@@ -9,7 +9,7 @@
   "module": "dist/index.modern.js",
   "source": "src/index.js",
   "engines": {
-    "node": ">=16"
+    "node": ">=10"
   },
   "publicConfig": {
     "access": "public"
@@ -27,7 +27,7 @@
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
-    "react": "^17.0.0"
+    "react": "^18.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
