@@ -24,7 +24,7 @@ export const login = (token, user, setAuth) => {
   setToken(token, user)
   setAuth({
     token,
-    idUser: jwtDecode(token),
+    idUser: jwtDecode(token).user_id,
     user: user
   })
 }
