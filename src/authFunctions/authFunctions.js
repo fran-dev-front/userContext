@@ -1,10 +1,15 @@
 export const TOKEN = "token"; 
 export const USER = "user";
+export const BASE_PATH = "basepath";
 import jwtDecode from 'jwt-decode'
 
 export function setToken(token, user){
   localStorage.setItem(TOKEN, token)
   localStorage.setItem(USER, JSON.stringify(user))
+}
+
+export function setBaseUrl(url){
+  localStorage.setItem(BASE_PATH, url)
 }
 
 export function getToken(){
@@ -15,9 +20,17 @@ export function getUser(){
   return JSON.parse(localStorage.getItem(USER))
 }
 
+export function getBaseUrl(){
+  return JSON.parse(localStorage.getItem(BASE_PATH))
+}
+
 export function removeToken(){
   localStorage.removeItem(TOKEN)
   localStorage.removeItem(USER)
+}
+
+export function removeBaseUrl(){
+  localStorage.removeItem(BASE_PATH)
 }
 
 export const login = (token, user, setAuth) => {
