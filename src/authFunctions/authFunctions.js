@@ -21,7 +21,7 @@ export function getUser(){
 }
 
 export function getBaseUrl(){
-  return JSON.parse(localStorage.getItem(BASE_PATH))
+  return localStorage.getItem(BASE_PATH)
 }
 
 export function removeToken(){
